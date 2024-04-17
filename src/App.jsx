@@ -10,17 +10,10 @@ import {
 import { loadingBar } from "./utils";
 
 export const App = () => {
-  const [fromSearch, setFromSearch] = useState({
-    onKey: false,
-    isReady: false,
-    isAuthReady: false,
-    isERAsegReady: false,
-    allReady: false,
-  });
+  const [fromSearch, setFromSearch] = useState({ onKey: false, isReady: false, isAuthReady: false, isERAsegReady: false, allReady: false });
   const { isReady, dataResponse, statusCode, onKey, isERAsegReady, ERAsegData, isAuthReady, LoadingLabel, allReady, authERAdata } = fromSearch;
   const loadingBarS = loadingBar({onKey, isReady, isERAsegReady, allReady, statusCode});
-  console.log(onKey, isReady, isERAsegReady, allReady, statusCode);
-  console.log(loadingBarS);
+  console.log(statusCode, LoadingLabel);
   
   return (
     <div>
