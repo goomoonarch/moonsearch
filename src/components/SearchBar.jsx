@@ -55,19 +55,35 @@ export const SearchBar = ({ onUserData }) => {
               allReady: false,
               authERAdata: null,
             });
-            const { data } = await getERAseg(dataResponse);
-            onUserData({
-              dataResponse,
-              statusCode,
-              LoadingLabel: "Cargando ERAseg ...",
-              onKey,
-              isReady: true,
-              isERAsegReady: true,
-              ERAsegData: data,
-              isAuthReady: false,
-              allReady: false,
-              authERAdata: null,
-            });
+            try {
+              const { data } = await getERAseg(dataResponse);
+              onUserData({
+                dataResponse,
+                statusCode,
+                LoadingLabel: "Cargando ERAseg ...",
+                onKey,
+                isReady: true,
+                isERAsegReady: true,
+                ERAsegData: data,
+                isAuthReady: false,
+                allReady: false,
+                authERAdata: null,
+              });
+            } catch {
+              onUserData({
+                dataResponse,
+                statusCode,
+                LoadingLabel: "ERAseg",
+                onKey,
+                isERAsegReady: true,
+                ERAsegData: {codigoEPS : null},
+                isReady: true,
+                isAuthReady: false,
+                allReady: true,
+                authERAdata: null,
+              });     
+            }
+
             /*let authERAseg;
             if (data.codigoRespuesta === "01" && EPSCodes.has(data.codigoEPS) && data.estadoAfiliacion ==="AC") {
               onUserData({
@@ -96,20 +112,8 @@ export const SearchBar = ({ onUserData }) => {
                 allReady: true,
                 isAuthReady: true,
               });
-            }  else*/ {
-              onUserData({
-                dataResponse,
-                statusCode,
-                LoadingLabel: "ERAseg",
-                onKey,
-                isERAsegReady: true,
-                ERAsegData: data,
-                isReady: true,
-                isAuthReady: false,
-                allReady: true,
-                authERAdata: null,
-              });      
-            }
+            }  else*/  
+            
           } else if (statusCode === 204) {
             onUserData({
               onKey,
@@ -132,6 +136,7 @@ export const SearchBar = ({ onUserData }) => {
             onKey,
             data: null,
             isReady: true,
+            allReady: true
           });
         }
       }

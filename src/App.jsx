@@ -19,6 +19,8 @@ export const App = () => {
   });
   const { isReady, dataResponse, statusCode, onKey, isERAsegReady, ERAsegData, isAuthReady, LoadingLabel, allReady, authERAdata } = fromSearch;
   const loadingBarS = loadingBar({onKey, isReady, isERAsegReady, allReady, statusCode});
+  console.log(onKey, isReady, isERAsegReady, allReady, statusCode);
+  console.log(loadingBarS);
   
   return (
     <div>
