@@ -52,18 +52,16 @@ export const getERAseg = async (dataResponse) => {
 
   try {
     const response = await fetch(
-      "https://paiwebservices.paiweb.gov.co:8081/api/interoperabilidad/GetEPSPersonaMSS",
+      "https://paiweb-proxy.goomoonarch.workers.dev/api/interoperabilidad/GetEPSPersonaMSS",
       requestOptions
     );
     let data;
     const status = response.status;
-    status === 200 ? (data = await response.json()) : null;
-    if (data.codigoRespuesta === "02") {
-      return { data, status };
-    } else {
-      return { data, status };
+    if (status === 200) {
+      data = await response.json();
     }
+    return { data: data ?? edata, status };
   } catch (e) {
-    if (e.message === "Failed to fetch") {return {data: edata, status: 606}}
+    return { data: edata, status: 606 };
   }
 };
